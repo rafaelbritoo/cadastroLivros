@@ -1,0 +1,4 @@
+CREATE TABLE Assunto (
+    codAs INT PRIMARY KEY AUTO_INCREMENT,
+    descricao VARCHAR(20)
+);

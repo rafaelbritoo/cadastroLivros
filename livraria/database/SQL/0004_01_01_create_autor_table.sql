@@ -1,0 +1,4 @@
+CREATE TABLE Autor (
+    codAu INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(40)
+);
