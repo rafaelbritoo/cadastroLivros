@@ -3,9 +3,9 @@
 @section('content')
     <div class="card mt-4 mb-4 border-light shadow">
         <div class="card-header hstack gap-7">
-            <span>Lista de assuntos</span>
+            <span>Livraria</span>
             <span class="ms-auto">
-                <a class="btn btn-success btn-sm" href="{{ route('assunto.create') }}">Cadastrar assunto</a>
+                <a class="btn btn-success btn-sm" href="{{ route('livro.create') }}">Cadastrar livro</a>
             </span>
         </div>
 
@@ -15,23 +15,31 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Descrição</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Editora</th>
+                    <th scope="col">Edição</th>
+                    <th scope="col">Ano de publicação</th>
+                    <th scope="col">Valor</th>
                     <th scope="col" class="text-center">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
 
-            @forelse($assuntos as $assunto)
+            @forelse($livros as $livro)
                 <tr>
-                    <th>{{ $assunto->codAs }}</th>
-                    <td>{{ $assunto->descricao }}</td>
+                    <th>{{ $livro->codl }}</th>
+                    <td>{{ $livro->titulo }}</td>
+                    <td>{{ $livro->editora }}</td>
+                    <td>{{ $livro->edicao }}</td>
+                    <td>{{ $livro->anoPublicacao }}</td>
+                    <td>{{ $livro->valor }}</td>
                     <td class="text-center">
-                        <a href="{{ route('assunto.show', ['assunto' => $assunto->codAs]) }}"  class="btn btn-primary btn-sm"> Visualizar assunto</a>
-                        <a href="{{ route('assunto.edit', ['assunto' => $assunto->codAs]) }}"  class="btn btn-warning btn-sm"> Editar assunto</a>
-                        <form action="{{ route('assunto.destroy', ['assunto' => $assunto->codAs]) }}" method="POST" class="d-inline">
+                        <a href="{{ route('livro.show', ['livro' => $livro->codl]) }}"  class="btn btn-primary btn-sm"> Visualizar livro</a>
+                        <a href="{{ route('livro.edit', ['livro' => $livro->codl]) }}"  class="btn btn-warning btn-sm"> Editar livro</a>
+                        <form action="{{ route('livro.destroy', ['livro' => $livro->codl]) }}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Deseja realmente apagar o assunto ({{ $assunto->descricao }}) ?')">Apagar</button>
+                            <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Deseja realmente apagar o livro ({{ $livro->titulo }}) ?')">Apagar</button>
                         </form>
                     </td>
                 </tr>

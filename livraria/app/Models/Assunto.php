@@ -30,4 +30,10 @@ class Assunto extends Model
 
     // Campos que não podem ser atualizados diretamente
     protected $guarded = ['codAs'];
+
+    // Relacionamento muitos para muitos entre Assunto e Livro
+    public function livros()
+    {
+        return $this->belongsToMany(Livro::class, 'Livro_Assunto', 'assunto_codAs', 'livro_cod');
+    }
 }

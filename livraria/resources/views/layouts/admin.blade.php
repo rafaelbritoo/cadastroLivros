@@ -21,7 +21,7 @@
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{{ route('autor.index') }}" class="nav-link px-2 text-white">Livros</a></li>
+                <li><a href="{{ route('livro.index') }}" class="nav-link px-2 text-white">Livros</a></li>
                 <li><a href="{{ route('autor.index') }}" class="nav-link px-2 text-white">Autores</a></li>
                 <li><a href="{{ route('assunto.index') }}" class="nav-link px-2 text-white">Assunto</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Relatorio</a></li>

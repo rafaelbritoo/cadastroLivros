@@ -6,32 +6,41 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Livro extends Model
+class LivroAssunto extends Model
 {
     use HasFactory, Notifiable;
 
-    //Tabela do banco responsavel por manter Livro
-    protected $table = 'Livro';
+    //Tabela do banco responsavel para tabela de ligaçao livro com assunto
+    protected $table = 'Livro_Assunto';
 
     // Desabilitar o uso dos campos created_at e updated_at
     public $timestamps = false;
 
-    // Definir a chave primária, já que não é 'id'
-    protected $primaryKey = 'codAl';
+    // Definir que essa tabela não possui chave primária padrão
+    public $incrementing = false;
+
+    // Desabilitar a chave primária
+    public $primaryKey = null;
 
     /**
-     * The attributes that are mass assignable.
+     * Os atributos que podem ser atribuídos em massa.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
-        'titulo',
-        'editora',
-        'edicao',
-        'anoPublicacao',
-        'valor'
+        'livro_cod',   // FK para a tabela Livro
+        'assunto_codAs', // FK para a tabela Aassunto
     ];
 
-    // Campos que não podem ser atualizados diretamente
-    protected $guarded = ['codl'];
+    // Relacionamento com a tabela Livro
+    public function livro()
+    {
+        return $this->belongsTo(Livro::class, 'livro_cod', 'codl');
+    }
+
+    // Relacionamento com a tabela Assunto
+    public function autor()
+    {
+        return $this->belongsTo(Assunto::class, 'assunto_codAs', 'codAs');
+    }
 }

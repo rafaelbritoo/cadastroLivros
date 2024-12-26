@@ -30,4 +30,10 @@ class Autor extends Model
 
     // Campos que não podem ser atualizados diretamente
     protected $guarded = ['codAu'];
+
+    // Relacionamento muitos para muitos entre Autor e Livro
+    public function livros()
+    {
+        return $this->belongsToMany(Livro::class, 'Livro_Autor', 'autor_codAu', 'livro_cod');
+    }
 }
