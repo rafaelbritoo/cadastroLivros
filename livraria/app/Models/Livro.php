@@ -11,7 +11,7 @@ class Livro extends Model
     use HasFactory, Notifiable;
 
     //Tabela do banco responsavel por manter Livro
-    protected $table = 'Livro';
+    protected $table = 'livro';
 
     // Desabilitar o uso dos campos created_at e updated_at
     public $timestamps = false;
@@ -43,12 +43,12 @@ class Livro extends Model
 
     public function autores()
     {
-        return $this->belongsToMany(Autor::class, 'Livro_Autor', 'livro_cod', 'autor_codAu');
+        return $this->belongsToMany(Autor::class, 'livro_autor', 'livro_codl', 'autor_codAu');
     }
 
     public function assuntos()
     {
-        return $this->belongsToMany(Assunto::class, 'Livro_Assunto', 'livro_cod', 'assunto_codAs');
+        return $this->belongsToMany(Assunto::class, 'livro_assunto', 'livro_codl', 'assunto_codAs');
     }
 
     public function autor()

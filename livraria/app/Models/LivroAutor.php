@@ -11,7 +11,7 @@ class LivroAutor extends Model
     use HasFactory, Notifiable;
 
     //Tabela do banco responsavel por ligar livro a autor
-    protected $table = 'Livro_Autor';
+    protected $table = 'livro_autor';
 
     // Desabilitar o uso dos campos created_at e updated_at
     public $timestamps = false;
@@ -28,14 +28,14 @@ class LivroAutor extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'livro_cod',   // FK para a tabela Livro
+        'livro_codl',   // FK para a tabela Livro
         'autor_codAu', // FK para a tabela Autor
     ];
 
     // Relacionamento com a tabela Livro
     public function livro()
     {
-        return $this->belongsTo(Livro::class, 'livro_cod', 'codl');
+        return $this->belongsTo(Livro::class, 'livro_codl', 'codl');
     }
 
     // Relacionamento com a tabela Autor

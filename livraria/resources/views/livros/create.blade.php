@@ -5,13 +5,13 @@
         <div class="card-header hstack gap-7">
             <span>Cadastro de livro</span>
             <span class="ms-auto">
-                <a class="btn btn-success btn-sm" href="{{ route('livro.index') }}">Listar livros</a>
+                <a class="btn btn-info btn-sm" href="{{ route('livro.index') }}">Listar livros</a>
             </span>
         </div>
 
         <div class="card-body">
             <x-alert />
-            <form action="{{ route('store-livro', ['livro' => $assunto->codl]) }}" method="POST" class="row g-3">
+            <form action="{{ route('store-livro') }}" method="POST" class="row g-3">
                 @csrf
                 @method('POST')
 

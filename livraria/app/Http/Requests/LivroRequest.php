@@ -30,7 +30,7 @@ class LivroRequest extends FormRequest
                 'required',
                 'min:3',
                 'max:40',
-                Rule::unique('Livro', 'titulo')->ignore($livroId, 'codl')
+                Rule::unique('livro', 'titulo')->ignore($livroId, 'codl')
             ],
             'editora' => [
                 'required',
@@ -51,6 +51,8 @@ class LivroRequest extends FormRequest
             'valor' => [
                 'required'
             ],
+            'codAu' => 'nullable|exists:autor,codAu',
+            'codAs' => 'nullable|exists:assunto,codAs',
         ];
     }
 

@@ -11,7 +11,7 @@ class Assunto extends Model
     use HasFactory, Notifiable;
 
     //Tabela do banco responsavel por manter assunto
-    protected $table = 'Assunto';
+    protected $table = 'assunto';
 
     // Desabilitar o uso dos campos created_at e updated_at
     public $timestamps = false;
@@ -34,6 +34,6 @@ class Assunto extends Model
     // Relacionamento muitos para muitos entre Assunto e Livro
     public function livros()
     {
-        return $this->belongsToMany(Livro::class, 'Livro_Assunto', 'assunto_codAs', 'livro_cod');
+        return $this->belongsToMany(Livro::class, 'livro_Assunto', 'assunto_codAs', 'livro_codl');
     }
 }

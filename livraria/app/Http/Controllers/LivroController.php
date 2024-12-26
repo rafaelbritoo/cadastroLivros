@@ -6,20 +6,16 @@ use App\Http\Requests\LivroRequest;
 use App\Models\Assunto;
 use App\Models\Autor;
 use App\Models\Livro;
-use App\Models\LivroAssunto;
-use App\Models\LivroAutor;
-use Illuminate\Support\Facades\DB;
+use App\Services\LivroService;
 
 
 class LivroController extends Controller
 {
-    public function __construct()
-    {
-        $objAutor   = new Autor();
-        $objAssunto = new Assunto();
+    protected $livroService;
 
-        $this->objAutor   = $objAutor;
-        $this->objAssunto = $objAssunto;
+    public function __construct(LivroService $livroService)
+    {
+        $this->livroService = $livroService;
     }
 
     public function index()
@@ -34,39 +30,21 @@ class LivroController extends Controller
     public function create()
     {
         // criar um novo livro
-        $autores = $this->objAutor->all();
-        $assuntos = $this->objAssunto->all();
+        $autores = Autor::all(); // busaca todos os autores para combo
+        $assuntos = Assunto::all(); // busaca todos os assuntos para combo
         return view('livros.create', compact('assuntos', 'autores'));
     }
 
     public function store(LivroRequest $request)
     {
-        // Remove o prefixo e converte para formato float
-        $valor = str_replace(['R$', '.', ',', ' '], ['', '', '.',''], $request->valor);
-
         //valida campos
-        $request->validated();
+        $data = $request->validated();
+        //formata valor vindo do request
+        $data['valor'] = $this->formatValor($request->valor);
 
-        // Cria um novo livro
-        $livro = Livro::create([
-            'titulo'        => $request->titulo,
-            'editora'       => $request->editora,
-            'edicao'        => $request->edicao,
-            'valor'         => $valor,
-            'anoPublicacao' => $request->anoPublicacao
-        ]);
+        // Cria um novo objeto livro
+        $this->livroService->createLivro($data);
 
-        LivroAutor::create([
-            'livro_cod'   => $livro->codl,
-            'autor_codAu' => $request->codAu
-        ]);
-
-        LivroAssunto::create([
-            'livro_cod'   => $livro->codl,
-            'assunto_codAs' => $request->codAs
-        ]);
-
-        // Retorna para a lista de livros
         return redirect()->route('livro.index')->with('success', 'Livro cadastrado com sucesso!');
     }
 
@@ -80,68 +58,45 @@ class LivroController extends Controller
     public function edit($id)
     {
         $livro      = Livro::with(['autores', 'assuntos'])->findOrFail($id);
-        $autores    = $this->objAutor->all();
-        $assuntos   = $this->objAssunto->all();
+        $autores    = Autor::all();
+        $assuntos   = Assunto::all();
         return view('livros.edit', compact('livro', 'autores', 'assuntos'));
     }
 
     public function update(LivroRequest $request, $id)
     {
-        // Remove o prefixo e converte para formato float
-        $valor = str_replace(['R$', '.', ',', ' '], ['', '', '.',''], $request->valor);
-
-        $request->validated();
-        // Atualiza um livro
         $livro = Livro::findOrFail($id);
+        //valida os campos
+        $data = $request->validated();
+        // Remove o prefixo e converte para formato float
+        $data['valor'] = $this->formatValor($request->valor);
 
-        $livro->update([
-            'titulo'        => $request->titulo,
-            'editora'       => $request->editora,
-            'edicao'        => $request->edicao,
-            'valor'         => $valor,
-            'anoPublicacao' => $request->anoPublicacao
-        ]);
-
-        if ($request->codAu) {
-            // Atualiza ou insere o registro relacionado de Livro_Autor
-            LivroAutor::updateOrInsert(
-                ['livro_cod' => $id], // Condição para verificar se o registro existe
-                ['autor_codAu' => $request->codAu] // Dados a serem atualizados ou inseridos
-            );
-        }
-
-        if ($request->codAs) {
-            // Atualiza ou insere o registro relacionado de Livro_Assunto
-            LivroAssunto::updateOrInsert(
-                ['livro_cod' => $id], // Condição para verificar se o registro existe
-                ['assunto_codAs' => $request->codAs] // Dados a serem atualizados ou inseridos
-            );
-        }
+        // Atualiza o objeto livro
+        $this->livroService->updateLivro($livro, $data);
 
         // Retorna para a lista de livros
-        return redirect()->route('livro.index')->with('success', 'Livro alterado com sucesso!');
+        return redirect()->route('livro.index')->with('success', 'Livro atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
-        DB::beginTransaction();
+        $livro = Livro::findOrFail($id);
 
         try {
-            // Obter o livro pelo ID
-            $livro = Livro::findOrFail($id);
-
-            // Excluir os registros nas tabelas relacionadas
-            LivroAssunto::where('livro_cod', $livro->codl)->delete();
-            LivroAutor::where('livro_cod', $livro->codl)->delete();
-
-            // Excluir o livro
-            $livro->delete();
-
-            DB::commit(); // Confirmar as alterações no banco
+            $this->livroService->deleteLivro($livro);
             return redirect()->route('livro.index')->with('success', 'Livro removido com sucesso!');
         } catch (\Exception $e) {
-            DB::rollBack(); // Reverter todas as alterações se ocorrer um erro
             return redirect()->route('livro.index')->with('error', 'Erro ao remover o livro.');
         }
+    }
+
+    /**
+     * Formata valaro do livro para manter no banco
+     * @param string $valor
+     * @return float
+     */
+    private function formatValor(string $valor): float
+    {
+        return (float) str_replace(['R$', '.', ',', ' '], ['', '', '.', ''], $valor);
     }
 }

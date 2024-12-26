@@ -28,7 +28,7 @@ class AutorRequest extends FormRequest
                 'required',
                 'min:3',
                 'max:40',
-                Rule::unique('Autor', 'nome')->ignore($autorId, 'codAu'),
+                Rule::unique('autor', 'nome')->ignore($autorId, 'codAu'),
             ],
         ];
     }

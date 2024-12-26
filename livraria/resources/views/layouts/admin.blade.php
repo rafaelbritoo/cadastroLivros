@@ -19,13 +19,25 @@
                     <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
                 </a>
             </div>
-
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{{ route('livro.index') }}" class="nav-link px-2 text-white">Livros</a></li>
-                <li><a href="{{ route('autor.index') }}" class="nav-link px-2 text-white">Autores</a></li>
-                <li><a href="{{ route('assunto.index') }}" class="nav-link px-2 text-white">Assunto</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Relatorio</a></li>
-            </ul>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand text-white " href="#">Livraria</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('livro.*') ? 'text-dark' : 'text-white' }}" href="{{ route('livro.index') }}">Livros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('autor.*') ? 'text-dark' : 'text-white' }}" href="{{ route('autor.index') }}">Autores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('assunto.*') ? 'text-dark' : 'text-white' }}" href="{{ route('assunto.index') }}">Assuntos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Relatório</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
             <div class="col-md-3 text-end">
 

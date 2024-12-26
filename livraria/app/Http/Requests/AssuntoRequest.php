@@ -28,7 +28,7 @@ class AssuntoRequest extends FormRequest
                 'required',
                 'min:3',
                 'max:20',
-                Rule::unique('Assunto', 'descricao')->ignore($assuntoId, 'codAs'),
+                Rule::unique('assunto', 'descricao')->ignore($assuntoId, 'codAs'),
             ],
         ];
     }

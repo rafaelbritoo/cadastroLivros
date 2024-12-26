@@ -11,7 +11,7 @@ class Autor extends Model
     use HasFactory, Notifiable;
 
     //Tabela do banco responsavel por manter autor
-    protected $table = 'Autor';
+    protected $table = 'autor';
 
     // Desabilitar o uso dos campos created_at e updated_at
     public $timestamps = false;
@@ -34,6 +34,6 @@ class Autor extends Model
     // Relacionamento muitos para muitos entre Autor e Livro
     public function livros()
     {
-        return $this->belongsToMany(Livro::class, 'Livro_Autor', 'autor_codAu', 'livro_cod');
+        return $this->belongsToMany(Livro::class, 'livro_autor', 'autor_codAu', 'livro_codl');
     }
 }
