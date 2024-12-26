@@ -58,7 +58,12 @@
 
                 <div class="col-md-4">
                     <label for="anoPublicacao" class="form-label">Ano de Publicação:</label>
-                    <input type="number" min="1500" max="{{ date('Y') }}"  class="form-control" id="anoPublicacao" name="anoPublicacao" value="{{ old('anoPublicacao', $livro->anoPublicacao) }}" placeholder="Selecione o ano" required>
+                    <select class="form-select form-select" id="anoPublicacao" name="anoPublicacao" required>
+                        <option value="">Selecione...</option>
+                        @foreach(range(date('Y'), 1500) as $ano)
+                            <option value="{{ $ano }}" {{ old('anoPublicacao', $livro->anoPublicacao) == $ano ? 'selected' : '' }}>{{ $ano }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -76,33 +81,5 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#valor').on('input', function () {
-            let value = $(this).val();
-
-            // Remove qualquer caractere não numérico
-            value = value.replace(/[^0-9]/g, '');
-
-            // Converte para número float e formata com duas casas decimais
-            value = (value / 100).toFixed(2);
-
-            // Substitui o ponto pela vírgula para formato brasileiro
-            value = value.replace('.', ',');
-
-            // Adiciona separadores de milhares
-            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-            // Atualiza o valor no campo com o prefixo "R$ "
-            $(this).val(value);
-        });
-
-        $('#anoPublicacao').datepicker({
-            format: 'yyyy',          // Formato do valor no campo
-            minViewMode: 2,          // Exibe apenas anos
-            autoclose: true,         // Fecha automaticamente após seleção
-            startDate: '1500',       // Ano inicial permitido
-            endDate: new Date().getFullYear().toString() // Ano final (atual)
-        });
-    });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script src="{{ asset('livro/assets/js/livro.js') }}"></script>
