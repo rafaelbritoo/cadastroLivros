@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AutorRequest;
 use App\Models\Autor;
-use App\Models\User;
 
 class AutorController extends Controller
 {
