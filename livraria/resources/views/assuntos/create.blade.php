@@ -17,7 +17,7 @@
 
                 <div class="col-md-12">
                     <label for="descricao" class="form-label">Descrição:</label>
-                    <input class="form-control" id="name" type="text" name="descricao" placeholder="Descrição do livro"><br><br>
+                    <input class="form-control" id="name" maxlength="20" type="text" name="descricao" placeholder="Descrição do livro"><br><br>
                 </div>
 
                 <div class="col-md-6">

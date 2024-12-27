@@ -42,6 +42,17 @@ RUN mkdir -p /var/www && \
     npm init -y && \
     npm install bootstrap
 
+# Instalar extensões necessárias para o Laravel Excel e DOMPDF
+RUN apt-get update && apt-get install -y \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    libgd-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install mbstring zip
+
 COPY --chown=user:laravel . /var/www
 
 USER user

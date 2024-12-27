@@ -17,7 +17,7 @@
 
                 <div class="col-md-12">
                     <label for="nome" class="form-label">Nome:</label>
-                    <input class="form-control" id="name" type="text" name="nome" placeholder="Nome do autor"><br><br>
+                    <input class="form-control" maxlength="40" id="name" type="text" name="nome" placeholder="Nome do autor"><br><br>
                 </div>
 
                 <div class="col-md-6">

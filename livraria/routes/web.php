@@ -2,6 +2,7 @@
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\AssuntoController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\RelatorioController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,10 @@ Route::get('/assunto/edit/{assunto}', [AssuntoController::class, 'edit'])->name(
 Route::post('/store-assunto', [AssuntoController::class, 'store'])->name('store-assunto');
 Route::put('/update-assunto/{assunto}', [AssuntoController::class, 'update'])->name('update-assunto');
 Route::delete('/destroy-assunto/{assunto}', [AssuntoController::class, 'destroy'])->name('assunto.destroy');
+
+// Rotas relacionadas a RELATORIO
+Route::get('/relatorio', [RelatorioController::class, 'index'])->name('relatorio.index');
+Route::get('/relatorio/export/pdf', [RelatorioController::class, 'exportPdf'])->name('relatorio.export.pdf');
+Route::get('/relatorio/export/excel', [RelatorioController::class, 'exportExcel'])->name('relatorio.export.excel');
+
+

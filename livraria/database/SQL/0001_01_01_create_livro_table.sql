@@ -41,5 +41,22 @@ CREATE TABLE livro_autor (
      FOREIGN KEY (autor_codAu) REFERENCES autor(codAu) ON DELETE CASCADE
 );
 
+CREATE VIEW vw_catalogo_livros AS
+SELECT
+    l.codl AS codigo_livro,
+    l.titulo AS livro_titulo,
+    l.editora AS editora,
+    l.edicao AS edicao,
+    l.anoPublicacao AS ano_publicacao,
+    a.nome AS autor_nome,
+    s.descricao AS assunto_nome,
+    CONCAT('R$ ', FORMAT(l.valor, 2, 'pt_BR')) as valor_formatado
+FROM
+    livro l
+        LEFT JOIN livro_autor la ON l.codl = la.livro_codl
+        LEFT JOIN autor a ON la.autor_codAu = a.codAu
+        LEFT JOIN livro_assunto ls ON l.codl = ls.livro_codl
+        LEFT JOIN assunto s ON ls.assunto_codAs = s.codAs;
+
 -- Finaliza a transação
 COMMIT;

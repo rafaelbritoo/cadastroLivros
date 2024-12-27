@@ -16,7 +16,7 @@
         <div class="card-body">
             <x-alert />
             <dl class="row">
-                <dt class="col-sm-3">ID:</dt>
+                <dt class="col-sm-3">Código:</dt>
                 <dd class="col-sm-2">{{ $assunto->codAs }}</dd>
             </dl>
 

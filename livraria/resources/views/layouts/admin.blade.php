@@ -33,7 +33,7 @@
                             <a class="nav-link {{ request()->routeIs('assunto.*') ? 'text-dark' : 'text-white' }}" href="{{ route('assunto.index') }}">Assuntos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Relatório</a>
+                            <a class="nav-link {{ request()->routeIs('relatorio.index') ? 'text-dark' : 'text-white' }}"  href="{{ route('relatorio.index') }}">Relatório</a>
                         </li>
                     </ul>
                 </div>

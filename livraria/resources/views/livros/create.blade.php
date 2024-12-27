@@ -17,7 +17,7 @@
 
                 <div class="col-md-12">
                     <label for="titulo" class="form-label">Título:</label>
-                    <input class="form-control" id="titulo" type="text" name="titulo" value="{{ old('titulo') }}" placeholder="Título do livro" required>
+                    <input class="form-control" maxlength="40" id="titulo" type="text" name="titulo" value="{{ old('titulo') }}" placeholder="Título do livro" required>
                 </div>
 
                 <div class="col-md-6">
@@ -42,7 +42,7 @@
 
                 <div class="col-md-4">
                     <label for="editora" class="form-label">Editora:</label>
-                    <input class="form-control" id="editora" type="text" name="editora" value="{{ old('editora') }}" placeholder="Editora do livro" required>
+                    <input class="form-control" maxlength="40" id="editora" type="text" name="editora" value="{{ old('editora') }}" placeholder="Editora do livro" required>
                 </div>
 
                 <div class="col-md-4">

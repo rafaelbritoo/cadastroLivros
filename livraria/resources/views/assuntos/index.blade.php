@@ -14,7 +14,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Código</th>
                     <th scope="col">Descrição</th>
                     <th scope="col" class="text-center">Ações</th>
                 </tr>

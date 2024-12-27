@@ -16,7 +16,7 @@
         <div class="card-body">
             <x-alert />
             <dl class="row">
-                <dt class="col-sm-2">ID:</dt>
+                <dt class="col-sm-2">Código:</dt>
                 <dd class="col-sm-2">{{ $livro->codl }}</dd>
             </dl>
 
