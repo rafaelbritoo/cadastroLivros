@@ -5,10 +5,18 @@
         <div class="card-header hstack gap-7">
             <span>Visualizar assunto</span>
             <span class="ms-auto d-sm-flex flex-row">
-                <a class="btn btn-info btn-sm me-1" href="{{ route('assunto.index') }}">Listar assuntos</a>
-                <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                    Apagar
-                </button>
+                <a class="btn btn-info btn-sm me-1" style="max-height: 32px" href="{{ route('assunto.index') }}">Listar assuntos</a>
+                <form action="{{ route('assunto.destroy', ['assunto' => $assunto->codAs]) }}" method="POST" id="delete-form-{{ $assunto->codAs }}">
+                    @csrf
+                    @method('DELETE')
+                    <button
+                        class="btn btn-danger btn-sm"
+                        type="button"
+                        onclick="confirmDelete('{{ $assunto->descricao }}', {{ $assunto->codAs }})"
+                    >
+                        Apagar
+                    </button>
+                </form>
             </span>
         </div>
 
@@ -26,28 +34,7 @@
             </dl>
         </div>
     </div>
-
-    <!-- Modal de Confirmação -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação de Exclusão</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Tem certeza de que deseja apagar o assunto <strong>{{  $assunto->descricao }}</strong>? Esta ação não pode ser desfeita.</p>
-                    <p><em>Essa exclusão será permanente, todos os dados relacionados ao livro serão removidos.</em></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form action="{{ route('assunto.destroy', ['assunto' => $assunto->codAs]) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Sim, Apagar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('livro/assets/js/aviso-delete.js') }}"></script>
+

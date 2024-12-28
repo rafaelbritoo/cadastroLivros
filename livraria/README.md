@@ -21,7 +21,7 @@ Este projeto implementa uma aplicação CRUD simples para gerenciamento de **Liv
 ### Passo 1: Clonar o Repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/projeto-livros.git
+git clone https://github.com/rafaelbritoo/cadastroLivros.git
 cd projeto-livros
 ```
 
@@ -43,6 +43,10 @@ docker-compose exec app composer install
 ```bash
 docker-compose exec app php artisan migrate
 docker-compose exec app php artisan db:seed
+
+Executar os scripts dentro do caminho:
+
+- livraria/database/SQL/0001_01_01_create_tables_livraria.sql
 ```
 
 ## Passo 5: Acessar a Aplicação

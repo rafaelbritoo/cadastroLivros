@@ -14,7 +14,7 @@ class AssuntoFactory extends Factory
     public function definition()
     {
         return [
-            'descricao' => fake()->word,
+            'descricao' => fake()->text(20),
         ];
     }
 }
