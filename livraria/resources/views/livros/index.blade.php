@@ -55,6 +55,7 @@
             </table>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('livro/assets/js/aviso-delete.js') }}"></script>
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('livro/assets/js/aviso-delete.js') }}"></script>
+
