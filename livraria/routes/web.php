@@ -3,6 +3,7 @@ use App\Http\Controllers\AutorController;
 use App\Http\Controllers\AssuntoController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\RelatorioController;
+use App\Http\Controllers\Api\RelatorioController as RelatorioApiController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,6 @@ Route::get('/relatorio', [RelatorioController::class, 'index'])->name('relatorio
 Route::get('/relatorio/export/pdf', [RelatorioController::class, 'exportPdf'])->name('relatorio.export.pdf');
 Route::get('/relatorio/export/excel', [RelatorioController::class, 'exportExcel'])->name('relatorio.export.excel');
 
-
+Route::prefix('api')->group(function () {
+    Route::get('/relatorio', [RelatorioApiController::class, 'index']);
+});

@@ -80,6 +80,12 @@ Executar os scripts dentro do caminho:
 - Geração de um relatório de livros.
 - Relatório gerado a partir de uma view no banco de dados.
 - O relatório pode ser gerado no formato PDF ou Excel(xml).
+- API para acesso ao relátorio.
+
+### 6.Teste unitários
+
+- Gera testes unitários para melhor escalabilidade e garantia na aplicação
+
 
 ## Licença
 
