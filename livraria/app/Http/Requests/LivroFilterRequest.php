@@ -26,6 +26,8 @@ class LivroFilterRequest extends FormRequest
             'editora' => 'nullable|string|max:40',
             'edicao' => 'nullable|integer',
             'anoPublicacao' => 'nullable|string|max:4',
+            'valor_min' => 'nullable|numeric|min:0',
+            'valor_max' => 'nullable|numeric|min:0|gte:valor_min',
         ];
     }
 
@@ -36,6 +38,8 @@ class LivroFilterRequest extends FormRequest
             'editora.max' => 'O campo editora deve ter no máximo 40 caracteres!',
             'edicao.integer' => 'O campo edição deve ser um numero inteiro!',
             'anoPublicacao.integer' => 'O campo Ano de publicação deve ser um ano válido!',
+            'valor_min.min' => 'O campo valor minímo deve ser maior que 0!',
+            'valor_max.gte' => 'O campo valor máximo deve ser maior que o valor minímo!',
         ];
     }
 }

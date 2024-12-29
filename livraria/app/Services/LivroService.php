@@ -77,6 +77,8 @@ class LivroService
             'editora' => $request->get('editora', ''),
             'edicao' => $request->get('edicao', ''),
             'anoPublicacao' => $request->get('anoPublicacao', ''),
+            'valor_min' => $request->get('valor_min', ''),
+            'valor_max' => $request->get('valor_max', ''),
             'sort_by' => $request->get('sort_by', 'codal'),
             'sort_direction' => $request->get('sort_direction', 'asc')
         ];
@@ -86,6 +88,8 @@ class LivroService
             ->filterByEditora($filters['editora'])
             ->filterByEdicao($filters['edicao'])
             ->filterByAnoPublicacao($filters['anoPublicacao'])
+            ->filterByValorMin($filters['valor_min'])
+            ->filterByValorMax($filters['valor_max'])
             ->sortBy($filters['sort_by'], $filters['sort_direction'] ?? 'asc');
 
         return $query->paginate(10);

@@ -34,9 +34,14 @@
                         </select>
                     </div>
 
-{{--                    <div class="col-md-4 mt-4">--}}
-{{--                        <input class="form-control" id="valor" type="text" name="valor" value="{{ old('valor') }}" placeholder="Valor do livro" required>--}}
-{{--                    </div>--}}
+                    <div class="col-md-4 mt-4">
+                        <input class="form-control" id="valor_min" type="text" name="valor_min"
+                               value="{{ request()->valor_min }}" placeholder="Valor mínimo">
+                    </div>
+                    <div class="col-md-4 mt-4">
+                        <input class="form-control" id="valor_max" type="text" name="valor_max"
+                               value="{{ request()->valor_max }}" placeholder="Valor máximo">
+                    </div>
                 </div>
                 <div class="col-md-4 mt-4">
                     <!-- Formulário para limpar filtros -->
@@ -100,15 +105,17 @@
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script src="{{ asset('livro/assets/js/livro.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('livro/assets/js/aviso-delete.js') }}"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#valor_min, #valor_max').mask('000.000.000.000,00', { reverse: true });
+        });
+
         $('#clearFiltersBtn').on('click', function() {
             // Limpa todos os campos de filtro do formulário
             $('#formSearch')[0].reset();

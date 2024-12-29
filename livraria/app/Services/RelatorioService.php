@@ -17,6 +17,11 @@ class RelatorioService
         $query = Relatorio::query();
 
         $query->filterByTitulo($filters['titulo'])
+            ->filterByEditora($filters['editora'])
+            ->filterByEdicao($filters['edicao'])
+            ->filterByAnoPublicacao($filters['anoPublicacao'])
+            ->filterByValorMin($filters['valor_min'])
+            ->filterByValorMax($filters['valor_max'])
             ->filterByAutor($filters['autor'])
             ->filterByAssunto($filters['assunto'])
             ->sortBy($filters['sort_by'], $filters['sort_direction'] ?? 'asc');
@@ -32,6 +37,11 @@ class RelatorioService
         // Obtém os filtros da requisição
         $filters = [
             'titulo' => $request->get('titulo', ''),  // Valor padrão: string vazia
+            'editora' => $request->get('editora', ''),
+            'edicao' => $request->get('edicao', ''),
+            'anoPublicacao' => $request->get('anoPublicacao', ''),
+            'valor_min' => $request->get('valor_min', ''),
+            'valor_max' => $request->get('valor_max', ''),
             'autor' => $request->get('autor', ''),    // Valor padrão: string vazia
             'assunto' => $request->get('assunto', ''), // Valor padrão: string vazia
             'sort_by' => $request->get('sort_by', 'livro_titulo'), // Valor padrão: 'livro_titulo'

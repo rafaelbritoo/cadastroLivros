@@ -94,6 +94,22 @@ class Livro extends Model
         return $query;
     }
 
+    public function scopeFilterByValorMin($query, $valorMin)
+    {
+        if (!empty($valorMin)) {
+            return $query->where('valor', '>=', $valorMin );
+        }
+        return $query;
+    }
+
+    public function scopeFilterByValorMax($query, $valorMax)
+    {
+        if (!empty($valorMax)) {
+            return $query->where('valor', '<=', $valorMax );
+        }
+        return $query;
+    }
+
     public function scopeSortBy($query, $column, $direction = 'asc')
     {
         if (in_array($column, ['codl'])) {

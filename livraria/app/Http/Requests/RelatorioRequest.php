@@ -26,6 +26,8 @@ class RelatorioRequest extends FormRequest
             'titulo' => 'nullable|string|max:40',
             'autor' => 'nullable|string|max:40',
             'assunto' => 'nullable|string|max:20',
+//            'valor_min' => 'nullable|numeric|min:0',
+//            'valor_max' => 'nullable|numeric|min:0|gte:valor_min',
             'sort_by' => 'nullable|in:livro_titulo,autor_nome,valor_formatado',
             'sort_direction' => 'nullable|in:asc,desc',
         ];
@@ -41,6 +43,8 @@ class RelatorioRequest extends FormRequest
             'assunto.string' => 'O assunto deve ser uma string.',
             'sort_by.in' => 'A ordenação é inválida.',
             'sort_direction.in' => 'A direção de ordenação é inválida.',
+            'valor_min.min' => 'O campo valor minímo deve ser maior que 0!',
+            'valor_max.gte' => 'O campo valor máximo deve ser maior que o valor minímo!',
         ];
     }
 }

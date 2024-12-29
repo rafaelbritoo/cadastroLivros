@@ -15,11 +15,38 @@
                     <div class="col-md-4">
                         <input type="text" maxlength="40" name="titulo" class="form-control" placeholder="Título do livro" value="{{ request()->titulo }}">
                     </div>
+
                     <div class="col-md-4">
+                        <input type="text" maxlength="40" name="editora" class="form-control" placeholder="Editora" value="{{ request()->editora }}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="number" name="edicao" class="form-control" placeholder="Edição" value="{{ request()->edicao }}">
+                    </div>
+
+                    <div class="col-md-4 mt-4">
+                        <select class="form-select form-select" id="anoPublicacao" name="anoPublicacao">
+                            <option value="">Ano de publicação</option>
+                            @foreach(range(date('Y'), 1500) as $ano)
+                                <option value="{{ $ano }}" {{ request()->anoPublicacao == $ano ? 'selected' : '' }}>{{ $ano }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mt-4">
                         <input type="text" maxlength="40" name="autor" class="form-control" placeholder="Nome do autor" value="{{ request()->autor }}">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-4">
                         <input type="text" maxlength="20" name="assunto" class="form-control" placeholder="Assunto" value="{{ request()->assunto }}">
+                    </div>
+
+                    <div class="col-md-4 mt-4">
+                        <input class="form-control" id="valor_min" type="text" name="valor_min"
+                               value="{{ request()->valor_min }}" placeholder="Valor mínimo">
+                    </div>
+                    <div class="col-md-4 mt-4">
+                        <input class="form-control" id="valor_max" type="text" name="valor_max"
+                               value="{{ request()->valor_max }}" placeholder="Valor máximo">
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
@@ -107,7 +134,12 @@
 
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#valor_min, #valor_max').mask('000.000.000.000,00', { reverse: true });
+        });
+
         $('#clearFiltersBtn').on('click', function() {
             // Limpa todos os campos de filtro do formulário
             $('#formSearch')[0].reset();
@@ -116,6 +148,6 @@
             window.location.href = '{{ route('relatorio.index') }}';
         });
     </script>
-@endsection
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+@endsection
 
