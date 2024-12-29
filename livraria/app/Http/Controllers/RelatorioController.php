@@ -18,20 +18,8 @@ class RelatorioController extends Controller
 
     public function index(RelatorioRequest $request)
     {
-        // Valida os campos do Form Request
-        $request->validated();
-
-        // Obtém os filtros da requisição
-        $filters = [
-            'titulo' => $request->get('titulo', ''),  // Valor padrão: string vazia
-            'autor' => $request->get('autor', ''),    // Valor padrão: string vazia
-            'assunto' => $request->get('assunto', ''), // Valor padrão: string vazia
-            'sort_by' => $request->get('sort_by', 'livro_titulo'), // Valor padrão: 'livro_titulo'
-            'sort_direction' => $request->get('sort_direction', 'asc') // Valor padrão: 'asc'
-        ];
-
         // Obtém os livros paginados usando o serviço
-        $livros = $this->relatorioService->getLivrosPaginated($filters);
+        $livros = $this->relatorioService->getLivros($request);
 
         // Carrega a view com os livros paginados
         return view('relatorios.index', compact('livros'));

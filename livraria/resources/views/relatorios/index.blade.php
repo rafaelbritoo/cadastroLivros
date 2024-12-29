@@ -10,7 +10,7 @@
             <h2 class="my-4">Catálogo de Livros</h2>
 
             <!-- Formulário de Filtro -->
-            <form method="GET" action="{{ route('relatorio.index') }}" class="mb-4">
+            <form method="GET" action="{{ route('relatorio.index') }}" id="formSearch" class="mb-4">
                 <div class="row">
                     <div class="col-md-4">
                         <input type="text" maxlength="40" name="titulo" class="form-control" placeholder="Título do livro" value="{{ request()->titulo }}">
@@ -26,9 +26,7 @@
                     <!-- Formulário para limpar filtros -->
                     <div class="d-flex">
                         <button type="submit" class="btn btn-primary me-2">Filtrar</button>
-                        <form method="GET" action="{{ route('relatorio.index') }}" class="d-flex align-items-center">
-                            <button type="submit" class="btn btn-warning">Limpar Filtros</button>
-                        </form>
+                        <button type="button" class="btn btn-warning" id="clearFiltersBtn">Limpar Filtros</button>
                     </div>
 
                     <!-- Botões para exportar Excel e PDF -->
@@ -108,6 +106,16 @@
         </div>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#clearFiltersBtn').on('click', function() {
+            // Limpa todos os campos de filtro do formulário
+            $('#formSearch')[0].reset();
+
+            // Opcional: Pode redirecionar para a mesma página sem filtros
+            window.location.href = '{{ route('relatorio.index') }}';
+        });
+    </script>
 @endsection
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
