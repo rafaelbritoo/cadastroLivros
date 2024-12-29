@@ -36,4 +36,20 @@ class Autor extends Model
     {
         return $this->belongsToMany(Livro::class, 'livro_autor', 'autor_codAu', 'livro_codl');
     }
+
+    public function scopeFilterByNome($query, $nome)
+    {
+        if (!empty($nome)) {
+            return $query->where('nome', 'like', '%' . $nome . '%');
+        }
+        return $query;
+    }
+
+    public function scopeSortBy($query, $column, $direction = 'asc')
+    {
+        if (in_array($column, ['codAu'])) {
+            return $query->orderBy($column, $direction);
+        }
+        return $query;
+    }
 }

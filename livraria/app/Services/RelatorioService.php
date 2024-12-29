@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Http\Requests\RelatorioRequest;
 use App\Models\Relatorio;
-use http\Env\Request;
 
 class RelatorioService
 {

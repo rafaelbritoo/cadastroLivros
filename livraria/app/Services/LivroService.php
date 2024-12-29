@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Http\Requests\LivroFilterRequest;
 use App\Models\Livro;
 use App\Models\LivroAutor;
 use App\Models\LivroAssunto;
@@ -57,5 +58,36 @@ class LivroService
             LivroAutor::where('livro_codl', $livro->codl)->delete();
             $livro->delete();
         });
+    }
+
+    /**
+     * Construir a consulta para os livros com base nos filtros.
+     *
+     * @param array $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getLivrosPaginated(LivroFilterRequest $request)
+    {
+        // Valida os campos do Form Request
+        $request->validated();
+
+        // Obtém os filtros da requisição
+        $filters = [
+            'titulo' => $request->get('titulo', ''),
+            'editora' => $request->get('editora', ''),
+            'edicao' => $request->get('edicao', ''),
+            'anoPublicacao' => $request->get('anoPublicacao', ''),
+            'sort_by' => $request->get('sort_by', 'codal'),
+            'sort_direction' => $request->get('sort_direction', 'asc')
+        ];
+        $query = Livro::query();
+
+        $query->filterByTitulo($filters['titulo'])
+            ->filterByEditora($filters['editora'])
+            ->filterByEdicao($filters['edicao'])
+            ->filterByAnoPublicacao($filters['anoPublicacao'])
+            ->sortBy($filters['sort_by'], $filters['sort_direction'] ?? 'asc');
+
+        return $query->paginate(10);
     }
 }

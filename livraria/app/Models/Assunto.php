@@ -36,4 +36,21 @@ class Assunto extends Model
     {
         return $this->belongsToMany(Livro::class, 'livro_Assunto', 'assunto_codAs', 'livro_codl');
     }
+
+    // Escopo para filtrar por descrição
+    public function scopeFilterByDescricao($query, $descricao)
+    {
+        if (!empty($descricao)) {
+            return $query->where('descricao', 'like', '%' . $descricao . '%');
+        }
+        return $query;
+    }
+
+    public function scopeSortBy($query, $column, $direction = 'asc')
+    {
+        if (in_array($column, ['codAs'])) {
+            return $query->orderBy($column, $direction);
+        }
+        return $query;
+    }
 }

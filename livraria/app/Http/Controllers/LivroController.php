@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LivroFilterRequest;
 use App\Http\Requests\LivroRequest;
 use App\Models\Assunto;
 use App\Models\Autor;
@@ -18,10 +19,10 @@ class LivroController extends Controller
         $this->livroService = $livroService;
     }
 
-    public function index()
+    public function index(LivroFilterRequest $request)
     {
         // Pega a lista de livros
-        $livros = Livro::orderByDesc('codl')->get();
+        $livros = $this->livroService->getLivrosPaginated($request);
 
         //carrega view de livros
         return view('livros.index', ['livros' => $livros]);

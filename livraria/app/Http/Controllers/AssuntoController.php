@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssuntoFilterRequest;
 use App\Http\Requests\AssuntoRequest;
 use App\Models\Assunto;
+use App\Services\AssuntoService;
 
 class AssuntoController extends Controller
 {
-    public function index()
+    protected $assuntoService;
+
+    public function __construct(AssuntoService $assuntoService)
+    {
+        $this->assuntoService = $assuntoService;
+    }
+    public function index(AssuntoFilterRequest $request)
     {
         // Pega a lista de assuntos
-        $assuntos = Assunto::orderByDesc('codAs')->get();
+        $assuntos = $this->assuntoService->getAssuntosPaginated($request);
 
         //carrega view de assuntos
         return view('assuntos.index', ['assuntos' => $assuntos]);

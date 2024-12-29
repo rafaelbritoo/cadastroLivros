@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AutorFilterRequest;
 use App\Http\Requests\AutorRequest;
 use App\Models\Autor;
+use App\Services\AutorService;
 
 class AutorController extends Controller
 {
-    public function index()
+    protected $autorService;
+
+    public function __construct(AutorService $autorService)
+    {
+        $this->autorService = $autorService;
+    }
+    public function index(AutorFilterRequest $request)
     {
         // Pega a lista de autores
-        $autores = Autor::orderByDesc('codAu')->get();
+        $autores = $this->autorService->getAutoresPaginated($request);
 
         //carrega view de autores
         return view('autores.index', ['autores' => $autores]);
