@@ -38,7 +38,11 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @if (is_null($assuntos[0]))
+                        <tr>
+                            <th colspan="7" class="text-center"> Não existem assuntos cadastrados ainda!</th>>
+                        </tr>
+                    @endif
                 @forelse($assuntos as $assunto)
                     <tr>
                         <th>{{ $assunto->codAs }}</th>

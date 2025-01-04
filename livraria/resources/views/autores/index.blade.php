@@ -37,7 +37,11 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @if (is_null($autores[0]))
+                        <tr>
+                            <th colspan="7" class="text-center"> Não existem autores cadastrados ainda!</th>>
+                        </tr>
+                    @endif
                 @forelse($autores as $autor)
                     <tr>
                         <th>{{ $autor->codAu }}</th>

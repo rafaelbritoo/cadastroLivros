@@ -68,7 +68,11 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                @if (is_null($livros[0]))
+                    <tr>
+                        <th colspan="7" class="text-center"> Não existem livros cadastrados ainda!</th>>
+                    </tr>
+                @endif
                 @forelse($livros as $livro)
                     <tr>
                         <th>{{ $livro->codl }}</th>
