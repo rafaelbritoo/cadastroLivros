@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RelatorioRequest;
 use App\Services\RelatorioService;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LivrosExport;
 
